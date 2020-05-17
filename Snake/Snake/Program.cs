@@ -11,11 +11,13 @@ namespace Snake
         static void Main(string[] args)
         {
 
+            Console.SetBufferSize(Console.WindowWidth, Console.WindowHeight);
+
             //Задаем рамку
-            HorizontalLine upLine = new HorizontalLine(0, Console.WindowWidth-1, 0, '+');
-            HorizontalLine downLine = new HorizontalLine(0, Console.WindowWidth-1, 28, '+');
+            HorizontalLine upLine = new HorizontalLine(0, 118, 0, '+');
+            HorizontalLine downLine = new HorizontalLine(0, 118, 28, '+');
             VerticalLine leftLine = new VerticalLine(0, 28, 0, '+');
-            VerticalLine rightLine = new VerticalLine(0, 28, Console.WindowWidth-1, '+');
+            VerticalLine rightLine = new VerticalLine(0, 28, 118, '+');
             upLine.Drow();
             downLine.Drow();
             leftLine.Drow();
@@ -26,12 +28,18 @@ namespace Snake
 
             Snake snake = new Snake(p, 4, Direction.RIGHT);
             snake.Drow();
-            snake.Move();
-        
 
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo key = Console.ReadKey();
+                    snake.HandleKey(key.Key);
+                }
+                System.Threading.Thread.Sleep(150);
+                snake.Move();
+            }
 
-
-            Console.ReadLine();
         }
     }
 }
