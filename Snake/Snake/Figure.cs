@@ -16,4 +16,6 @@ namespace Snake
                 p.Draw();
             }
         }
+    }
 }
+
